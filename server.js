@@ -10,6 +10,18 @@ app.use(bodyParser.urlencoded({
 	extended: false
 }))
 
+var sequelize = require('sequelize'),
+	connection;
+if(process.env.JAWSDB_URL){
+	connection = new sequelize(process.env.JAWSDB_URL);
+} else{
+	connection = new sequelize ('burgers_db', 'root','1111',{
+		host:'localhost',
+		dialect: 'mysql',
+		port: '3000'
+	})
+}
+
 
 app.use(methodOverride('_method'))
 var exphbs = require('express-handlebars');
